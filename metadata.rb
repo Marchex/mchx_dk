@@ -4,7 +4,7 @@ maintainer_email 'tools-team@marchex.com'
 license 'all_rights'
 description 'Installs/Configures marchefdk'
 long_description 'Installs/Configures marchefdk'
-version '0.1.1'
+version '0.1.2'
 
 depends 'mchx_chef_helpers'
 
