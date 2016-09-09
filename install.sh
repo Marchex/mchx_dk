@@ -24,5 +24,7 @@ if [[ ! -d marchefdk ]]; then
 fi
 
 cd marchefdk
+sudo chef-client -z recipes/installs.rb
+
 
 #git clone git@github.marchex.com:marchex-chef/marchex-chef-generator
