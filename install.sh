@@ -19,12 +19,12 @@ mkdir -p $HOME/marchex-chef/tests
 cd $HOME/marchex-chef
 
 echo '### marchefdk: get marchefdk repo so we can finish setting up our environment'
-if [[ ! -d marchefdk ]]; then
-    git clone git@github.marchex.com:marchex-chef/marchefdk
+if [[ -d marchefdk ]]; then
+    cd marchefdk
+    git pull origin master
+else
+    git clone https://github.marchex.com/marchex-chef/marchefdk
+    cd marchefdk
 fi
 
-cd marchefdk
 sudo chef-client -z recipes/installs.rb
-
-
-#git clone git@github.marchex.com:marchex-chef/marchex-chef-generator

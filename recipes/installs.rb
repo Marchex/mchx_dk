@@ -18,6 +18,7 @@ end
   git repo do
     repository "https://github.marchex.com/marchex-chef/#{repo}"
     destination "#{ENV['HOME']}/marchex-chef/#{repo}"
+    user ENV['USER']
     action :sync
   end
 end
