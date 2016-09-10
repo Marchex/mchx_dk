@@ -14,8 +14,10 @@ node.default['marchefdk']['chef_gem_list'].each do |gem|
   end
 end
 
-git 'marchex-chef-generator' do
-  repository 'git@github.marchex.com:marchex-chef/marchex-chef-generator'
-  destination "#{ENV['HOME']}/marchex-chef/marchex-chef-generator"
-  action :sync
+%w(marchex-chef-generator marchefdk).each do |repo|
+  git repo do
+    repository "https://github.marchex.com/marchex-chef/#{repo}"
+    destination "#{ENV['HOME']}/marchex-chef/#{repo}"
+    action :sync
+  end
 end
