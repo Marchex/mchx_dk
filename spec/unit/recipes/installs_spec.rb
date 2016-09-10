@@ -35,6 +35,7 @@ def test_platform(attrs)
       vagrant-cachier
     )
     repos = %w(
+      marchefdk
       marchex-chef-generator
     )
 
