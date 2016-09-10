@@ -22,18 +22,11 @@ def test_platform(attrs)
     expect { chef_run }.to_not raise_error
   end
 
-  it 'installs packages' do
-    chef_run.converge(described_recipe)
-
-    packages = %w(vagrant virtualbox)
-    packages.each do |pkg|
-      expect(chef_run).to install_package pkg
-    end
-  end
-
-  it 'installs gems' do
-    chef_run.converge(described_recipe)
-
+  context 'installs' do
+    packages = %w(
+      vagrant
+      virtualbox
+    )
     gems = %w(
       tty-prompt
       chef-vault-testfixtures
@@ -41,9 +34,36 @@ def test_platform(attrs)
       vagrant-omnibus
       vagrant-cachier
     )
-    gems.each do |gem|
-      expect(chef_run).to install_chef_gem gem
+    repos = %w(
+      marchex-chef-generator
+    )
+
+    packages.sort.each do |pkg|
+      it "package #{pkg}" do
+        chef_run.converge(described_recipe)
+        expect(chef_run).to install_package pkg
+      end
     end
+
+    gems.sort.each do |gem|
+      it "gem #{gem}" do
+        chef_run.converge(described_recipe)
+        expect(chef_run).to install_chef_gem gem
+      end
+    end
+
+    repos.sort.each do |repo|
+      it "repo #{repo}" do
+        chef_run.converge(described_recipe)
+        expect(chef_run).to sync_git(repo).with(
+          'destination' => ENV['HOME'] + "/marchex-chef/" + repo
+        )
+      end
+    end
+  end
+
+  it 'fetches repos' do
+    chef_run.converge(described_recipe)
   end
 end
 
