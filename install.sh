@@ -76,15 +76,15 @@ create_dirs() {
 }
 
 get_repo() {
-    echo_head 'get marchefdk repo so we can finish setting up our environment'
-    if [[ -d cookbooks/marchefdk ]]; then
-        cd cookbooks/marchefdk
+    echo_head 'get mchx_dk repo so we can finish setting up our environment'
+    if [[ -d cookbooks/mchx_dk ]]; then
+        cd cookbooks/mchx_dk
         # the cookbook should self-update, but let's pull it ourselves just in case
         git pull origin master
         cd ../..
     else
         cd cookbooks
-        git clone https://github.marchex.com/marchex-chef/marchefdk
+        git clone https://github.marchex.com/marchex-chef/mchx_dk
         cd ..
     fi
 }
@@ -122,9 +122,20 @@ knife[:vault_mode] =    'client'
 EOF
 }
 
+delivery_toml() {
+    echo_head 'creating delivery config'
+    mkdir -p ${basedir}/.delivery
+    cat << EOF > ${basedir/.delivery/cli.toml
+server = "delivery.marchex.com"
+enterprise = "marchex"
+organization = "marchex"
+user = "${USER}"
+EOF
+}
+
 run_chef_client() {
     echo_head 'run recipes to finish setup'
-    ${basedir}/cookbooks/marchefdk/run_cookbook.sh
+    ${basedir}/cookbooks/mchx_dk/run_cookbook.sh
 }
 
 finish() {
@@ -146,6 +157,7 @@ update_env
 create_dirs
 get_repo
 knife_rb
+delivery_toml
 run_chef_client
 finish
 

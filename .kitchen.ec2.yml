@@ -35,8 +35,8 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[marchefdk::default]
+      - recipe[mchx_dk::default]
     attributes:
     verifier:
       inspec_tests:
-      - https://github.marchex.com/marchex-chef/tests_mchx_auditd/archive/master.tar.gz
+      - https://github.marchex.com/marchex-chef/tests_mchx_dk/archive/master.tar.gz

@@ -40,7 +40,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[marchefdk::default]
+      - recipe[mchx_dk::default]
     attributes:
     verifier:
       inspec_tests:
