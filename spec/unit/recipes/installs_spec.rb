@@ -33,6 +33,7 @@ def test_platform(attrs)
       chef-api
       vagrant-omnibus
       vagrant-cachier
+      inspec
     )
     repos = %w(
       marchefdk
