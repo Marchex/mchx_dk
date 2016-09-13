@@ -125,7 +125,7 @@ EOF
 delivery_toml() {
     echo_head 'creating delivery config'
     mkdir -p ${basedir}/.delivery
-    cat << EOF > ${basedir/.delivery/cli.toml
+    cat << EOF > ${basedir}/.delivery/cli.toml
 server = "delivery.marchex.com"
 enterprise = "marchex"
 organization = "marchex"

@@ -32,6 +32,12 @@ task :rubocop do
     sh "rubocop ."
 end
 
+desc "Checks shell syntax."
+task :syntax do
+    sh "bash -n install.sh"
+    sh "bash -n run_cookbook.sh"
+end
+
 desc "Run delivery verify tests."
 task :dverify do
   sh "delivery job -l verify 'unit lint syntax'"
@@ -58,6 +64,7 @@ desc "Run unit tests."
 task :unit do
   Rake::Task[:lint].execute
   Rake::Task[:chefspec].execute
+  Rake::Task[:syntax].execute
 end
 
 desc "Run integration tests."
