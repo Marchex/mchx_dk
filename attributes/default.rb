@@ -10,7 +10,7 @@ default['mchx_dk']['basedir'] = '/site/marchex-chef'
 default['mchx_dk']['repo_list'] = {
   'marchex-chef/marchex-chef-generator' => '',
   'marchex-chef/mchx_chef_helpers'      => 'cookbooks',
-  'marchex-chef/mchx_dk'              => 'cookbooks',
+  'marchex-chef/mchx_dk'                => 'cookbooks',
   'marchex-chef/tests_mchx_dk'          => 'tests'
 }
 
