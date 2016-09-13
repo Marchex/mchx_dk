@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: marchefdk
+# Cookbook Name:: mchx_dk
 # Recipe:: installs
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
@@ -9,11 +9,11 @@ if node['platform_family'] == 'debian'
   execute 'apt-get update'
 end
 
-node['marchefdk']['package_list'].each do |pkg|
+node['mchx_dk']['package_list'].each do |pkg|
   package pkg
 end
 
-node['marchefdk']['chef_gem_list'].each do |gem|
+node['mchx_dk']['chef_gem_list'].each do |gem|
   chef_gem gem do
     compile_time false
   end

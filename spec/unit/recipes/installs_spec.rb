@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: marchefdk
+# Cookbook Name:: mchx_dk
 # Spec:: installs
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
@@ -31,20 +31,20 @@ def test_platform(attrs)
 
   it 'installs packages' do
     chef_run.converge(described_recipe)
-    chef_run.node['marchefdk']['package_list'].sort.each do |pkg|
+    chef_run.node['mchx_dk']['package_list'].sort.each do |pkg|
       expect(chef_run).to install_package pkg
     end
   end
 
   it 'installs gems' do
     chef_run.converge(described_recipe)
-    chef_run.node['marchefdk']['chef_gem_list'].sort.each do |chef_gem|
+    chef_run.node['mchx_dk']['chef_gem_list'].sort.each do |chef_gem|
       expect(chef_run).to install_chef_gem chef_gem
     end
   end
 end
 
-describe 'marchefdk::installs' do
+describe 'mchx_dk::installs' do
   context 'on ubuntu 12.04' do
     test_platform(platform: 'ubuntu', version: '12.04')
   end

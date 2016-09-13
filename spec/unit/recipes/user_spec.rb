@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: marchefdk
+# Cookbook Name:: mchx_dk
 # Spec:: user
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
@@ -24,15 +24,15 @@ def test_platform(attrs)
 
   it 'installs repos' do
     chef_run.converge(described_recipe)
-    chef_run.node['marchefdk']['repo_list'].sort.each do |repo, dir|
+    chef_run.node['mchx_dk']['repo_list'].sort.each do |repo, dir|
       expect(chef_run).to sync_git(repo).with(
-        'destination' => chef_run.node['marchefdk']['basedir'] + "/#{dir}/" + File.basename(repo)
+        'destination' => chef_run.node['mchx_dk']['basedir'] + "/#{dir}/" + File.basename(repo)
       )
     end
   end
 end
 
-describe 'marchefdk::user' do
+describe 'mchx_dk::user' do
   context 'on ubuntu 12.04' do
     test_platform(platform: 'ubuntu', version: '12.04')
   end

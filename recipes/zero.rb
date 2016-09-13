@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: marchefdk
+# Cookbook Name:: mchx_dk
 # Recipe:: zero
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-include_recipe 'marchefdk::installs'
-include_recipe 'marchefdk::user'
+include_recipe 'mchx_dk::installs'
+include_recipe 'mchx_dk::user'

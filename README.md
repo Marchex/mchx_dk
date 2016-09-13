@@ -1,4 +1,4 @@
-# marchefdk
+# mchx_dk
 
 This is the development kit for doing Chef development at Marchex.
 
@@ -12,14 +12,14 @@ This is the development kit for doing Chef development at Marchex.
   * You will only need to re-run the install script if you want to re-install your setup, or update ChefDK.
   * Commands:
     * If you have curl:
-      * `bash <(curl -sL https://github.marchex.com/marchex-chef/marchefdk/raw/master/install.sh)`
+      * `bash <(curl -sL https://github.marchex.com/marchex-chef/mchx_dk/raw/master/install.sh)`
     * If you have wget:
-      * `bash <(wget -qO- https://github.marchex.com/marchex-chef/marchefdk/raw/master/install.sh)`
-    * Otherwise just fetch [the install script](https://github.marchex.com/marchex-chef/marchefdk/raw/master/install.sh) and run:
+      * `bash <(wget -qO- https://github.marchex.com/marchex-chef/mchx_dk/raw/master/install.sh)`
+    * Otherwise just fetch [the install script](https://github.marchex.com/marchex-chef/mchx_dk/raw/master/install.sh) and run:
       * `bash install.sh`
 1. To update your development kit at any time:
 ```
-cd marchex-chef/cookbooks/marchefdk/
+cd marchex-chef/cookbooks/mchx_dk/
 git pull
 ./run_cookbook.sh # or install.sh to re-run the whole install, including updating ChefDK
 ```
