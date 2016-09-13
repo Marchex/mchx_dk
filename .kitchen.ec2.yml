@@ -39,4 +39,4 @@ suites:
     attributes:
     verifier:
       inspec_tests:
-      - https://github.marchex.com/marchex-chef/tests_mchx_auditd/archive/master.tar.gz
+      - https://github.marchex.com/marchex-chef/tests_mchx_dk/archive/master.tar.gz

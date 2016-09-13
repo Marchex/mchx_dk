@@ -32,6 +32,22 @@ task :rubocop do
     sh "rubocop ."
 end
 
+desc "Run delivery verify tests."
+task :dverify do
+  sh "delivery job -l verify 'unit lint syntax'"
+end
+
+desc "Run delivery verify tests."
+task :dkitchen do
+  sh "delivery job -l acceptance functional"
+end
+
+desc "Run delivery verify tests."
+task :delivery do
+  Rake::Task[:dverify].execute
+  Rake::Task[:dkitchen].execute
+end
+
 desc "Run validation tests."
 task :lint do
   Rake::Task[:foodcritic].execute
@@ -47,5 +63,11 @@ end
 desc "Run integration tests."
 task :integration do
   Rake::Task[:chefspec].execute
+  Rake::Task[:kitchen].execute
+end
+
+desc "Run all tests."
+task :all do
+  Rake::Task[:unit].execute
   Rake::Task[:kitchen].execute
 end

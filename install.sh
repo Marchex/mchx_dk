@@ -122,6 +122,17 @@ knife[:vault_mode] =    'client'
 EOF
 }
 
+delivery_toml() {
+    echo_head 'creating delivery config'
+    mkdir -p ${basedir}/.delivery
+    cat << EOF > ${basedir/.delivery/cli.toml
+server = "delivery.marchex.com"
+enterprise = "marchex"
+organization = "marchex"
+user = "${USER}"
+EOF
+}
+
 run_chef_client() {
     echo_head 'run recipes to finish setup'
     ${basedir}/cookbooks/mchx_dk/run_cookbook.sh
@@ -146,6 +157,7 @@ update_env
 create_dirs
 get_repo
 knife_rb
+delivery_toml
 run_chef_client
 finish
 
