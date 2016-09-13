@@ -14,4 +14,5 @@ default['marchefdk']['chef_gem_list'] = %w(
   chef-api
   vagrant-omnibus
   vagrant-cachier
+  inspec
 )
