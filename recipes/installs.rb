@@ -4,13 +4,13 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-# unfortunately necessary sometimes
-execute 'apt-get update' if node['platform_family'] == 'debian'
+if node['platform_family'] == 'debian'
+  # unfortunately necessary sometimes
+  execute 'apt-get update'
+end
 
-if %w(debian rhel).include? node['platform_family']
-  node['marchefdk']['package_list'].each do |pkg|
-    package pkg
-  end
+node['marchefdk']['package_list'].each do |pkg|
+  package pkg
 end
 
 node['marchefdk']['chef_gem_list'].each do |gem|

@@ -19,7 +19,7 @@ This is the development kit for doing Chef development at Marchex.
       * `bash install.sh`
 1. To update your development kit at any time:
 ```
-    cd marchex-chef/cookbooks/marchefdk/
-    git pull
-    ./run_cookbook.sh # or install.sh to re-run the whole install, including updating ChefDK
+cd marchex-chef/cookbooks/marchefdk/
+git pull
+./run_cookbook.sh # or install.sh to re-run the whole install, including updating ChefDK
 ```

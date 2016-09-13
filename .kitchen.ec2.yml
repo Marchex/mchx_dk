@@ -14,6 +14,9 @@ provisioner:
   name: chef_zero
   data_path: test/shared
 
+verifier:
+  name: inspec
+
 transport:
   ssh_key: <%= ENV['KITCHEN_EC2_SSH_KEY_PATH'] %>
   username: ubuntu
@@ -34,3 +37,6 @@ suites:
     run_list:
       - recipe[marchefdk::default]
     attributes:
+    verifier:
+      inspec_tests:
+      - https://github.marchex.com/marchex-chef/tests_mchx_auditd/archive/master.tar.gz

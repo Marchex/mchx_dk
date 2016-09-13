@@ -31,10 +31,8 @@ def test_platform(attrs)
 
   it 'installs packages' do
     chef_run.converge(described_recipe)
-    if %w(debian rhel).include? chef_run.node['platform_family']
-      chef_run.node['marchefdk']['package_list'].sort.each do |pkg|
-        expect(chef_run).to install_package pkg
-      end
+    chef_run.node['marchefdk']['package_list'].sort.each do |pkg|
+      expect(chef_run).to install_package pkg
     end
   end
 

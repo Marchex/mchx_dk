@@ -34,12 +34,13 @@ fix_prereqs() {
 
 install_chefdk() {
     echo_head 'install ChefDK'
+    requested_channel=stable
     requested_version=latest # x.y.z for specific version
     install_version=$(chef --version 2>/dev/null| grep '^Chef Development Kit Version' | perl -pe 's|^.+?: ([\d.]+).*$|$1|')
     # XXX dynamically supply p / pv / m?  or does it matter for metadata?
-    avail_version=$(curl -sL 'https://omnitruck.chef.io/stable/chefdk/metadata?p=ubuntu&pv=12.04&m=x86_64&v='$requested_version | grep ^url | perl -pe 's|^.+/chefdk_([\d.]+).+$|$1|')
+    avail_version=$(curl -sL 'https://omnitruck.chef.io/'$requested_channel'/chefdk/metadata?p=ubuntu&pv=12.04&m=x86_64&v='$requested_version | grep ^url | perl -pe 's|^.+/chefdk_([\d.]+).+$|$1|')
     if [[ ! "$install_version" || ("$install_version" != "$avail_version") ]]; then
-        curl --retry 5 -sL https://omnitruck.chef.io/install.sh | sudo bash -s -- -c stable -P chefdk -v $requested_version
+        curl --retry 5 -sL https://omnitruck.chef.io/install.sh | sudo bash -s -- -c $requested_channel -P chefdk -v $requested_version
     fi
 }
 
