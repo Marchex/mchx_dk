@@ -22,50 +22,23 @@ def test_platform(attrs)
     expect { chef_run }.to_not raise_error
   end
 
-  context 'installs' do
-    packages = %w(
-      vagrant
-      virtualbox
-    )
-    gems = %w(
-      tty-prompt
-      chef-vault-testfixtures
-      chef-api
-      vagrant-omnibus
-      vagrant-cachier
-      inspec
-    )
-    repos = %w(
-      marchefdk
-      marchex-chef-generator
-    )
+  it 'updates apt' do
+    chef_run.converge(described_recipe)
+    expect(chef_run).to run_execute 'apt-get update'
+  end
 
-    packages.sort.each do |pkg|
-      it "package #{pkg}" do
-        chef_run.converge(described_recipe)
-        expect(chef_run).to install_package pkg
-      end
-    end
-
-    gems.sort.each do |gem|
-      it "gem #{gem}" do
-        chef_run.converge(described_recipe)
-        expect(chef_run).to install_chef_gem gem
-      end
-    end
-
-    repos.sort.each do |repo|
-      it "repo #{repo}" do
-        chef_run.converge(described_recipe)
-        expect(chef_run).to sync_git(repo).with(
-          'destination' => ENV['HOME'] + "/marchex-chef/" + repo
-        )
-      end
+  it 'installs packages' do
+    chef_run.converge(described_recipe)
+    chef_run.node['marchefdk']['package_list'].sort.each do |pkg|
+      expect(chef_run).to install_package pkg
     end
   end
 
-  it 'fetches repos' do
+  it 'installs gems' do
     chef_run.converge(described_recipe)
+    chef_run.node['marchefdk']['chef_gem_list'].sort.each do |chef_gem|
+      expect(chef_run).to install_chef_gem chef_gem
+    end
   end
 end
 

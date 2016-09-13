@@ -4,9 +4,7 @@ maintainer_email 'tools-team@marchex.com'
 license 'all_rights'
 description 'Installs/Configures marchefdk'
 long_description 'Installs/Configures marchefdk'
-version '0.1.6'
-
-depends 'mchx_chef_helpers'
+version '0.1.7'
 
 issues_url 'https://jira.marchex.com'
 source_url 'https://github.marchex.com/marchex-chef/marchefdk'

@@ -8,13 +8,19 @@ BLUE='\033[1;34m'
 NC='\033[0m'
 myshell=$(basename $SHELL)
 
-echo_out() {
+echo_msg() {
     local msg=$1
-    printf "\n\n${RED}### mchx_dk:${NC} ${YELLOW}${msg}${NC}\n"
+    printf "${YELLOW}${msg}${NC}\n"
+}
+
+echo_head() {
+    local msg=$1
+    printf "\n${RED}### mchx_dk:${NC} "
+    echo_msg "${msg}"
 }
 
 fix_prereqs() {
-    echo_out 'check prereqs'
+    echo_head 'check prereqs'
     if [[ ! -x $(which curl) ]]; then
         if [[ -x $(which apt-get) ]]; then
             sudo apt-get update
@@ -27,7 +33,7 @@ fix_prereqs() {
 }
 
 install_chefdk() {
-    echo_out 'install ChefDK'
+    echo_head 'install ChefDK'
     requested_version=latest # x.y.z for specific version
     install_version=$(chef --version 2>/dev/null| grep '^Chef Development Kit Version' | perl -pe 's|^.+?: ([\d.]+).*$|$1|')
     # XXX dynamically supply p / pv / m?  or does it matter for metadata?
@@ -38,12 +44,22 @@ install_chefdk() {
 }
 
 update_env() {
-    echo_out 'add chefdk to environment'
+    echo_head 'add chefdk to environment'
     eval "$(chef shell-init ${myshell})"
 }
 
 create_dirs() {
-    echo_out 'create base directory structure'
+    echo_head 'create base directory structure'
+    basedir=''
+    if [[ -f "$HOME/.marchex-chef-basedir" ]]; then
+        basedir=$(cat $HOME/.marchex-chef-basedir)
+    fi
+    if [[ ! -z "$basedir" && -e $basedir ]]; then
+        echo_msg "Using '${basedir}'"
+        cd ${basedir}
+        return
+    fi
+
     printf "${YELLOW}Where do you want to install your development environment?${NC} [${BLUE}${HOME}${NC}] "
     read
     if [[ -z "$REPLY" ]]; then
@@ -52,27 +68,34 @@ create_dirs() {
         basedir=$REPLY
     fi
     basedir="${basedir}/marchex-chef"
+    echo "${basedir}" > $HOME/.marchex-chef-basedir
     mkdir -p ${basedir}/cookbooks
     mkdir -p ${basedir}/tests
     cd ${basedir}
 }
 
 get_repo() {
-    echo_out 'get marchefdk repo so we can finish setting up our environment'
+    echo_head 'get marchefdk repo so we can finish setting up our environment'
     if [[ -d marchefdk ]]; then
-        cd marchefdk
+        cd cookbooks/marchefdk
         # the cookbook should self-update, but let's pull it ourselves just in case
         git pull origin master
+        cd ../..
     else
+        cd cookbooks
         git clone https://github.marchex.com/marchex-chef/marchefdk
-        cd marchefdk
+        cd ..
     fi
 }
 
 knife_rb() {
-    echo_out 'set up environment'
+    echo_head 'set up environment'
     mkdir -p ${basedir}/.chef
     local knifefile="${basedir}/.chef/knife.rb"
+    if [[ -e $knifefile ]]; then
+        echo_msg "'${knifefile}' already exists; skipping"
+        return
+    fi
 
     client_key=$(grep 'client_key' $HOME/.chef/knife.rb 2>/dev/null | perl -pe 's/\s*client_key\s+"([^"]+?)"/$1/')
     if [[ -z "${client_key}" ]]; then
@@ -99,18 +122,23 @@ EOF
 }
 
 run_chef_client() {
-    echo_out 'run recipes to finish setup'
-    sudo chef-client -z recipes/installs.rb
+    echo_head 'run recipes to finish setup'
+    ${basedir}/cookbooks/marchefdk/run.sh
 }
 
 finish() {
-    echo_out 'installation complete'
-    printf "${BLUE}Please add these lines to your .bash_profile (if you don't have them already):${NC}\n"
-    echo "eval \"\$(chef shell-init ${myshell})\""
+    echo_head 'installation complete'
+    printf "${BLUE}If you haven't already:${NC}\n"
+    if [[ ! -z "${client_key}" ]]; then
+        printf "  * ${BLUE}Copy your client key file to ${client_key}${NC}\n"
+    fi
+    printf "  * ${BLUE}Add this line to your .bash_profile or equivalent:${NC}\n"
+    echo   "    eval \"\$(chef shell-init ${myshell})\""
     echo ""
-    printf "${BLUE}Please copy your client key file to ${client_key} (if you haven't already)${NC}\n"
+    echo "Done."
 }
 
+# do things
 fix_prereqs
 install_chefdk
 update_env
