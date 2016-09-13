@@ -4,11 +4,13 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-# blech
-execute 'apt-get update'
+# unfortunately necessary sometimes
+execute 'apt-get update' if node['platform_family'] == 'debian'
 
-node['marchefdk']['package_list'].each do |pkg|
-  package pkg
+if %w(debian rhel).include? node['platform_family']
+  node['marchefdk']['package_list'].each do |pkg|
+    package pkg
+  end
 end
 
 node['marchefdk']['chef_gem_list'].each do |gem|
