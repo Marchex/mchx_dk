@@ -24,13 +24,17 @@ def test_platform(attrs)
 
   it 'updates apt' do
     chef_run.converge(described_recipe)
-    expect(chef_run).to run_execute 'apt-get update'
+    if chef_run.node['platform_family'] == 'debian'
+      expect(chef_run).to run_execute 'apt-get update'
+    end
   end
 
   it 'installs packages' do
     chef_run.converge(described_recipe)
-    chef_run.node['marchefdk']['package_list'].sort.each do |pkg|
-      expect(chef_run).to install_package pkg
+    if %w(debian rhel).include? chef_run.node['platform_family']
+      chef_run.node['marchefdk']['package_list'].sort.each do |pkg|
+        expect(chef_run).to install_package pkg
+      end
     end
   end
 

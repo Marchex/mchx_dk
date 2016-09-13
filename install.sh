@@ -123,7 +123,7 @@ EOF
 
 run_chef_client() {
     echo_head 'run recipes to finish setup'
-    ${basedir}/cookbooks/marchefdk/run.sh
+    ${basedir}/cookbooks/marchefdk/run_cookbook.sh
 }
 
 finish() {
