@@ -76,7 +76,7 @@ create_dirs() {
 
 get_repo() {
     echo_head 'get marchefdk repo so we can finish setting up our environment'
-    if [[ -d marchefdk ]]; then
+    if [[ -d cookbooks/marchefdk ]]; then
         cd cookbooks/marchefdk
         # the cookbook should self-update, but let's pull it ourselves just in case
         git pull origin master
