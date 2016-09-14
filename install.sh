@@ -89,15 +89,8 @@ get_repo() {
     fi
 }
 
-knife_rb() {
-    echo_head 'set up environment'
-    mkdir -p ${basedir}/.chef
-    local knifefile="${basedir}/.chef/knife.rb"
-    if [[ -e $knifefile ]]; then
-        echo_msg "'${knifefile}' already exists; skipping"
-        return
-    fi
-
+get_client_key() {
+    echo_head 'getting client key'
     client_key=$(grep 'client_key' $HOME/.chef/knife.rb 2>/dev/null | perl -pe 's/\s*client_key\s+"([^"]+?)"/$1/')
     if [[ -z "${client_key}" ]]; then
         client_key="${basedir}/.chef/${USER}.pem"
@@ -109,28 +102,7 @@ knife_rb() {
         client_key=$REPLY
     fi
 
-    cat << EOF > $knifefile
-home =                  "#{ENV['HOME']}"
-current_dir =           File.dirname(__FILE__)
-log_level               :info
-log_location            STDOUT
-node_name               "${USER}"
-client_key              "${client_key}"
-chef_server_url         "https://chef.marchex.com/organizations/marchex"
-cookbook_path           ["#{current_dir}/../cookbooks"]
-knife[:vault_mode] =    'client'
-EOF
-}
-
-delivery_toml() {
-    echo_head 'creating delivery config'
-    mkdir -p ${basedir}/.delivery
-    cat << EOF > ${basedir}/.delivery/cli.toml
-server = "delivery.marchex.com"
-enterprise = "marchex"
-organization = "marchex"
-user = "${USER}"
-EOF
+    echo "${client_key}" > $HOME/.marchex-chef-client-key
 }
 
 run_chef_client() {
@@ -144,7 +116,8 @@ finish() {
     if [[ ! -z "${client_key}" ]]; then
         printf "  * ${BLUE}Copy your client key file to ${client_key}${NC}\n"
     fi
-    printf "  * ${BLUE}Add this line to your .bash_profile or equivalent:${NC}\n"
+    printf "  * ${BLUE}Add this line to your .bash_profile or equivalent,${NC}\n"
+    printf "    ${BLUE}and${NC} ${RED}execute it in your shell now:${NC}\n"
     echo   "    eval \"\$(chef shell-init ${myshell})\""
     echo ""
     echo "Done."
@@ -156,14 +129,6 @@ install_chefdk
 update_env
 create_dirs
 get_repo
-knife_rb
-delivery_toml
+get_client_key
 run_chef_client
 finish
-
-
-
-#delivery token
-#github token
-#copy hosted chef client key to on-prem
-

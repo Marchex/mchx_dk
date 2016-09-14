@@ -26,9 +26,37 @@ def test_platform(attrs)
     chef_run.converge(described_recipe)
     chef_run.node['mchx_dk']['repo_list'].sort.each do |repo, dir|
       expect(chef_run).to sync_git(repo).with(
-        'destination' => chef_run.node['mchx_dk']['basedir'] + "/#{dir}/" + File.basename(repo)
+        'destination' => chef_run.node['mchx_dk']['basedir'] + "/#{dir}/" + File.basename(repo),
+        'branch'      => 'master',
+        'user'        => chef_run.node['mchx_dk']['user']
       )
     end
+  end
+
+  it 'creates dirs' do
+    chef_run.converge(described_recipe)
+    basedir = chef_run.node['mchx_dk']['basedir']
+    dk_user = chef_run.node['mchx_dk']['user']
+    expect(chef_run).to create_directory(basedir).with('owner' => dk_user)
+    expect(chef_run).to create_directory("#{basedir}/cookbooks").with('owner' => dk_user)
+    expect(chef_run).to create_directory("#{basedir}/tests").with('owner' => dk_user)
+    expect(chef_run).to create_directory("#{basedir}/.chef").with('owner' => dk_user)
+    expect(chef_run).to create_directory("#{basedir}/.delivery").with('owner' => dk_user)
+    expect(chef_run).to create_link("#{basedir}/.delivery/.chef").with('owner' => dk_user, 'to' => "#{basedir}/.chef")
+  end
+
+  it 'installs conf files' do
+    chef_run.converge(described_recipe)
+    basedir = chef_run.node['mchx_dk']['basedir']
+    dk_user = chef_run.node['mchx_dk']['user']
+    expect(chef_run).to create_template_if_missing("#{basedir}/.delivery/cli.toml").with(
+      'source' => 'cli.toml.erb',
+      'owner'  => dk_user
+    )
+    expect(chef_run).to create_template_if_missing("#{basedir}/.chef/knife.rb").with(
+      'source' => 'knife.rb.erb',
+      'owner'  => dk_user
+    )
   end
 end
 
