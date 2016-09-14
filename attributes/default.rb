@@ -3,9 +3,12 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-# this is only used in users.rb, which is for use with chef-zero,
-# and should be supplied on cmdline; this is just a dummy default value
+# these are only used in users.rb, which is for use with chef-zero,
+# and should be supplied on cmdline; these are just default values
+# intended to be overwritten
 default['mchx_dk']['basedir'] = '/site/marchex-chef'
+default['mchx_dk']['user'] = ENV['USER']
+default['mchx_dk']['client_key'] = "/site/marchex-chef/.chef/#{ENV['USER']}.pem"
 
 default['mchx_dk']['repo_list'] = {
   'marchex-chef/marchex-chef-generator' => '',

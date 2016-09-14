@@ -1,0 +1,10 @@
+home =                  "#{ENV['HOME']}"
+current_dir =           File.dirname(__FILE__)
+log_level               :info
+log_location            STDOUT
+node_name               "<%= @dk_user %>"
+client_key              "<%= @dk_client_key %>"
+chef_server_url         "https://chef.marchex.com/organizations/marchex"
+cookbook_path           ["#{current_dir}/../cookbooks"]
+knife[:vault_mode] =    'client'
+
