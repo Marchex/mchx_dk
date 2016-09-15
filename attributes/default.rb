@@ -32,4 +32,5 @@ default['mchx_dk']['chef_gem_list'] = %w(
   vagrant-omnibus
   vagrant-cachier
   inspec
+  rest-client
 )
