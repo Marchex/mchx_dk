@@ -9,19 +9,22 @@ This is the development kit for doing Chef development at Marchex.
   * Notes:
     * ChefDK will be installed from Chef, along with supporting system packages as necessary, in default system locations.
     * The Marchex-specific portions of the kit will be placed in one directory on your workstation (default is `$HOME/marchex-chef`).
-    * If you are not using bash, execute the script with `bash` instead of `.`.
     * You will be prompted a few times for paths and passwords.
     * You will only need to re-run the install script if you want to re-install your setup, or update ChefDK.
   * Commands:
     * If you have curl:
-      * `. <(curl -sL https://github.marchex.com/marchex-chef/mchx_dk/raw/master/install.sh)`
+      * `bash <(curl -sL https://github.marchex.com/marchex-chef/mchx_dk/raw/master/install.sh)`
     * If you have wget:
-      * `. <(wget -qO- https://github.marchex.com/marchex-chef/mchx_dk/raw/master/install.sh)`
+      * `bash <(wget -qO- https://github.marchex.com/marchex-chef/mchx_dk/raw/master/install.sh)`
     * Otherwise just fetch [the install script](https://github.marchex.com/marchex-chef/mchx_dk/raw/master/install.sh) and run:
-      * `. install.sh`
+      * `bash install.sh`
+1. Run `eval "$(chef shell-init bash)"` to load the chef DK into your environment.  Add this to your `.bash_profile` if you want it run for you when you log in.  (If not using `bash`, adjust accordingly.)
 1. To update your development kit at any time:
 ```
 cd marchex-chef/cookbooks/mchx_dk/
 git pull
 ./run_cookbook.sh # or install.sh to re-run the whole install, including updating ChefDK
 ```
+
+
+DO NOT PROMPT for client key
