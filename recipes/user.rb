@@ -24,11 +24,11 @@ directory "#{basedir}/.chef" do
   owner dk_user
 end
 
-directory "#{basedir}/.delivery" do
+directory "#{ENV['HOME']}/.delivery" do
   owner dk_user
 end
 
-link "#{basedir}/.delivery/.chef" do
+link "#{ENV['HOME']}/.delivery/.chef" do
   to "#{basedir}/.chef"
   owner dk_user
 end
@@ -43,7 +43,7 @@ template "#{basedir}/.chef/knife.rb" do
   action :create_if_missing
 end
 
-template "#{basedir}/.delivery/cli.toml" do
+template "#{ENV['HOME']}/.delivery/cli.toml" do
   source "cli.toml.erb"
   owner dk_user
   variables(

@@ -41,15 +41,15 @@ def test_platform(attrs)
     expect(chef_run).to create_directory("#{basedir}/cookbooks").with('owner' => dk_user)
     expect(chef_run).to create_directory("#{basedir}/tests").with('owner' => dk_user)
     expect(chef_run).to create_directory("#{basedir}/.chef").with('owner' => dk_user)
-    expect(chef_run).to create_directory("#{basedir}/.delivery").with('owner' => dk_user)
-    expect(chef_run).to create_link("#{basedir}/.delivery/.chef").with('owner' => dk_user, 'to' => "#{basedir}/.chef")
+    expect(chef_run).to create_directory("#{ENV['HOME']}/.delivery").with('owner' => dk_user)
+    expect(chef_run).to create_link("#{ENV['HOME']}/.delivery/.chef").with('owner' => dk_user, 'to' => "#{basedir}/.chef")
   end
 
   it 'installs conf files' do
     chef_run.converge(described_recipe)
     basedir = chef_run.node['mchx_dk']['basedir']
     dk_user = chef_run.node['mchx_dk']['user']
-    expect(chef_run).to create_template_if_missing("#{basedir}/.delivery/cli.toml").with(
+    expect(chef_run).to create_template_if_missing("#{ENV['HOME']}/.delivery/cli.toml").with(
       'source' => 'cli.toml.erb',
       'owner'  => dk_user
     )
