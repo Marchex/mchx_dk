@@ -56,7 +56,7 @@ create_dirs() {
         basedir=$(cat $HOME/.marchex-chef-basedir)
     fi
     if [[ ! -z "$basedir" && -e "$basedir" ]]; then
-        echo_msg "Using '$basedir'"
+        echo_msg "using '$basedir'"
         cd "$basedir"
         return
     fi
@@ -93,8 +93,10 @@ get_repo() {
 get_client_key() {
     echo_head 'getting client key'
     client_key=$(grep 'client_key' "${basedir}/.chef/knife.rb" 2>/dev/null | perl -pe 's/\s*client_key\s+"([^"]+?)"/$1/')
+    client_key_found=1
 
     if [[ -z "$client_key" ]]; then
+        client_key_found=0
         client_key=$(grep 'client_key' "$HOME/.chef/knife.rb" 2>/dev/null | perl -pe 's/\s*client_key\s+"([^"]+?)"/$1/')
         if [[ -z "$client_key" ]]; then
             client_key="$basedir/.chef/$USER.pem"
@@ -107,7 +109,7 @@ get_client_key() {
         fi
     fi
 
-    echo_msg "Using '$client_key'"
+    echo_msg "using '$client_key'"
     echo "$client_key" > "$HOME/.marchex-chef-client-key"
 }
 
@@ -119,12 +121,12 @@ run_chef_client() {
 
 finish() {
     echo_head 'installation complete'
+    echo ''
     printf "${YELLOW}If you haven't already:$NC\n"
-    if [[ ! -z "$client_key" ]]; then
+    if [[ $client_key_found == 0 ]]; then
         printf "  * ${BLUE}Copy your client key file to $client_key$NC\n"
     fi
-    printf "  * ${BLUE}Add this line to your .bash_profile or equivalent,$NC\n"
-    printf "    ${BLUE}and$NC ${RED}execute it in your shell now:$NC\n"
+    printf "  * ${BLUE}Add this line to your .bash_profile or equivalent, and$NC ${RED}execute it in your shell now:$NC\n"
     echo   "    eval \"\$(chef shell-init $myshell)\""
     echo ""
     echo "Done."
