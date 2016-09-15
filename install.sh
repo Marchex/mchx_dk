@@ -93,24 +93,27 @@ get_repo() {
 get_client_key() {
     echo_head 'getting client key'
     client_key=$(grep 'client_key' "${basedir}/.chef/knife.rb" 2>/dev/null | perl -pe 's/\s*client_key\s+"([^"]+?)"/$1/')
+
     if [[ -z "$client_key" ]]; then
         client_key=$(grep 'client_key' "$HOME/.chef/knife.rb" 2>/dev/null | perl -pe 's/\s*client_key\s+"([^"]+?)"/$1/')
-    fi
-    if [[ -z "$client_key" ]]; then
-        client_key="$basedir/.chef/$USER.pem"
+        if [[ -z "$client_key" ]]; then
+            client_key="$basedir/.chef/$USER.pem"
+        fi
+
+        printf "${YELLOW}Where is your Chef client key?$NC [$BLUE$client_key$NC] "
+        read
+        if [[ ! -z "$REPLY" ]]; then
+            client_key=$REPLY
+        fi
     fi
 
-    printf "${YELLOW}Where is your Chef client key?$NC [$BLUE$client_key$NC] "
-    read
-    if [[ ! -z "$REPLY" ]]; then
-        client_key=$REPLY
-    fi
-
+    echo_msg "Using '$client_key'"
     echo "$client_key" > "$HOME/.marchex-chef-client-key"
 }
 
 run_chef_client() {
     echo_head 'run recipes to finish setup'
+    echo_msg 'please be patient, this may take some time'
     "$basedir/cookbooks/mchx_dk/run_cookbook.sh"
 }
 
