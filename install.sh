@@ -82,12 +82,14 @@ get_repo() {
         cd "$basedir/cookbooks/mchx_dk"
         # the cookbook should self-update, but let's pull it ourselves just in case
         git pull --ff-only origin master
-        cd "$basedir"
     else
         cd "$basedir/cookbooks"
         git clone https://github.marchex.com/marchex-chef/mchx_dk
-        cd "$basedir"
+        cd mchx_dk
     fi
+    # put branch name here for testing
+    #git checkout fix-chef-run
+    cd "$basedir"
 }
 
 get_client_key() {
