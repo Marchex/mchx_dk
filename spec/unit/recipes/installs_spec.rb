@@ -42,6 +42,14 @@ def test_platform(attrs)
       expect(chef_run).to install_chef_gem chef_gem
     end
   end
+
+  it 'installs octokit gem' do
+    chef_run.converge(described_recipe)
+    expect(chef_run).to install_chef_gem('octokit').with(
+      'source'        => 'http://rubygems.sea.marchex.com/',
+      'clear_sources' => true
+    )
+  end
 end
 
 describe 'mchx_dk::installs' do
