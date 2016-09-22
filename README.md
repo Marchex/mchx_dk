@@ -10,10 +10,18 @@ It will prepare your workstation for working with cookbooks: creating, writing, 
 To use mchx_dk you need accounts on Marchex's [Chef](https://chef.marchex.com/), [Delivery](https://delivery.marchex.com/), [GitHub](https://github.marchex.com/), and possibly in AWS as well.
 
 * Log in to [GitHub](https://github.marchex.com/) to create your account (see the [GitHub wiki page](http://wiki.marchex.com/index.php/GitHub#Access) for more information)
-* Also set up your GitHub API token
+* Set up your GitHub API token
 * Go to [Chef](https://chef.marchex.com/) and sign in with your LDAP username and password to create your account, and select the option to Link your account
-* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20and%20Delivery%20accounts) to set up your Chef and Delivery accounts.  They will create your account in the Delivery UI (making you an "LDAP" user with "admin" role) and then run `create_chef_users.sh $USER` to finalize setting your accounts up.
-* Copy your Chef client key to your workstation at `$HOME/.ssh/$USER.pem` (or wherever you prefer)
+* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20and%20Delivery%20accounts) to set up your Chef and Delivery accounts.  They will create your account in the Delivery UI (making you an "LDAP" user with "admin" role) and then run `setup_chef_user.sh $USER` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting your accounts up.
+
+
+## Get Client Key
+
+If you do not already have a client key for the in-house Chef server, you will need to either get your key migrated from the old server, or create a new one if you don't have an old one.
+
+* To migrate it, ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20migrate%20my%20Chef%20key) that you want it migrated, and tell them what your user name is on the out-house Chef.  Then you can use the same key on both in-house and out-house Chef servers.  The admin will run `migrate_chef_user_key.sh $OUTHOUSE_USER $USER` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to copy your public key from the out-house Chef to the in-house Chef.
+* If you do not have a client key, or you need to reset it, you can go into the UI, select your name in the top right, select "My Profile", and then click "Reset Key."  That will generate a new key and give you the new private key file.
+* Copy your Chef client key to your workstation at `$HOME/.ssh/$USER.pem` (or wherever you prefer) so you can tell the installer where it lives.
 
 
 ## Install DK
