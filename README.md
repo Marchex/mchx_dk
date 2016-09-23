@@ -1,6 +1,6 @@
 # mchx_dk
 
-This is the development kit for doing Chef development at Marchex.  It installs the [Chef Development Kit](https://github.com/chef/chef-dk) from Chef, along with supporting system packages as necessary, in default system locations.  The Marchex-specific portions of the kit will be placed in one directory on your workstation (default is `$HOME/marchex-chef`).
+This is the development kit for doing Chef development at Marchex.  It installs the [Chef Development Kit](https://github.com/chef/chef-dk) from Chef, along with supporting system packages as necessary, in default system locations.  The Marchex-specific portions of the kit will be placed in one directory on your workstation (default is `$HOME/marchex-chef`, but it can be wherever you wish).
 
 It will prepare your workstation for working with cookbooks: creating, writing, modifying, and testing them.
 
@@ -40,3 +40,12 @@ If you do not already have a client key for the in-house Chef server, you will n
     * Or, just fetch [the install script](https://github.marchex.com/marchex-chef/mchx_dk/raw/master/install.sh) and execute it:
         * `bash install.sh`
 1. After the script runs, execute `eval "$(chef shell-init bash)"` to load the chef DK into your environment.  Add this to your `.bash_profile` if you want it run for you when you log in.  (If not using `bash`, adjust accordingly.)
+
+
+## Verify Installation
+
+1. `cd` to your new directory `marchex-chef/cookbooks/mchx_dk`.
+1. Run `knife user show $USER` to see your own user config from the Chef server.
+1. Run `knife user list | grep ianderson` to verify that `ianderson` is *NOT* in the list.  This ensures we are using the correct Chef server.
+1. Run `delivery api get orgs` to verify that communication with the Delivery server is working.
+1. Run `rake unit dverify` to test that the basic tests are working.
