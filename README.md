@@ -7,13 +7,15 @@ It will prepare your workstation for working with cookbooks: creating, writing, 
 
 ## Create User Accounts
 
-To use mchx_dk you need accounts on Marchex's [Chef](https://chef.marchex.com/), [Delivery](https://delivery.marchex.com/), [GitHub](https://github.marchex.com/).
+To use mchx_dk you need accounts on Marchex's [Chef](https://chef.marchex.com/), [Automate](https://delivery.marchex.com/)*, [GitHub](https://github.marchex.com/).
 
 * Log in to [GitHub](https://github.marchex.com/) to create your account (see the [GitHub wiki page](http://wiki.marchex.com/index.php/GitHub#Access) for more information)
 * Set up your GitHub API token
 * Go to [Chef](https://chef.marchex.com/) and sign in with your LDAP username and password to create your account, and select the option to Link your account
-* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20and%20Delivery%20accounts) to set up your Chef and Delivery accounts.
-  * **TOOLS TEAM ONLY**: create the user's account in the Delivery UI (as an "LDAP" user with "admin" role) and then run `setup_chef_user.sh $USER` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.
+* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20and%20Automate%20accounts) to set up your Chef and Automate accounts.
+  * **TOOLS TEAM ONLY**: create the user's account in the Automate UI (as an "LDAP" user with "admin" role) and then run `setup_chef_user.sh $USER` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.
+
+* Chef Automate is a product that includes Workflow (which used to be called Delivery) and Insights.
 
 
 ## Get Client Key
@@ -47,5 +49,5 @@ If you do not already have a client key for the in-house Chef server, you will n
 1. `cd` to your new directory `marchex-chef/cookbooks/mchx_dk`.
 1. Run `knife user show $USER` to see your own user config from the Chef server.
 1. Run `knife user list | grep ianderson` to verify that `ianderson` is *NOT* in the list.  This ensures we are using the correct Chef server.
-1. Run `delivery api get orgs` to verify that communication with the Delivery server is working.
+1. Run `delivery api get orgs` to verify that communication with the Automate Workflow server is working.
 1. Run `rake unit dverify` to test that the basic tests are working.
