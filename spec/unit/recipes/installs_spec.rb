@@ -43,12 +43,14 @@ def test_platform(attrs)
     end
   end
 
-  it 'installs octokit gem' do
+  it 'installs custom gems' do
     chef_run.converge(described_recipe)
-    expect(chef_run).to install_chef_gem('octokit').with(
-      'source'        => 'http://rubygems.sea.marchex.com/',
-      'clear_sources' => true
-    )
+    %w(octokit marchex_helpers).sort.each do |chef_gem|
+      expect(chef_run).to install_chef_gem(chef_gem).with(
+        'source'        => 'http://rubygems.sea.marchex.com/',
+        'clear_sources' => true
+      )
+    end
   end
 end
 
