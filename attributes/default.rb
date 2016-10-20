@@ -21,7 +21,6 @@ default['mchx_dk']['package_list'] = []
 if node['platform_family'] == 'debian'
   default['mchx_dk']['package_list'] += %w(
     vagrant
-    virtualbox
   )
 end
 

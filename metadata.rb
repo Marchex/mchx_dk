@@ -9,4 +9,5 @@ version '0.1.20'
 issues_url 'https://jira.marchex.com'
 source_url 'https://github.marchex.com/marchex-chef/mchx_dk'
 
+depends 'apt'
 # we want this to be a standalone cookbook, so no dependencies unless necessary
