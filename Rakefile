@@ -24,7 +24,8 @@ end
 
 desc "Runs foodcritic."
 task :foodcritic do
-    sh "foodcritic . -I ./foodcritic_rules.rb"
+    sh "foodcritic ."
+    sh "foodcritic . -G -t marchex"
 end
 
 desc "Runs rubocop."
