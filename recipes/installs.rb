@@ -12,6 +12,32 @@ end
 node['mchx_dk']['package_list'].each do |pkg|
   package pkg
 end
+#
+# If 12.04, then vbox 4x (if not ubuntu, you're on your own)
+apt_repository 'virtualbox-4x' do
+  only_if { node['platform'].eql?('ubuntu') && (node['platform_version'] == '12.04') }
+  uri 'http://download.virtualbox.org/virtualbox/debian'
+  distribution 'trusty'
+  components ['contrib']
+  key 'http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc'
+end
+
+package 'virtualbox-4.3' do
+  only_if { node['platform'] == 'ubuntu' && node['platform_version'] == '12.04' }
+end
+#
+# If 16.04, then vbox 5x
+apt_repository 'virtualbox-5x' do
+  only_if { node['platform'].eql?('ubuntu') && (node['platform_version'] == '16.04') }
+  uri 'http://download.virtualbox.org/virtualbox/debian'
+  distribution 'xenial'
+  components ['contrib']
+  key 'http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc'
+end
+
+package 'virtualbox-5.0' do
+  only_if { node['platform'] == 'ubuntu' && node['platform_version'] == '16.04' }
+end
 
 node['mchx_dk']['chef_gem_list'].each do |gem|
   chef_gem gem do
