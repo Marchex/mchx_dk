@@ -45,13 +45,6 @@ node['mchx_dk']['chef_gem_list'].each do |gem|
   end
 end
 
-chef_gem 'octokit' do
-  clear_sources true
-  source 'http://rubygems.sea.marchex.com/'
-  version '4.3.1.pre1'
-  compile_time false
-end
-
 chef_gem 'marchex_helpers' do
   clear_sources true
   source 'http://rubygems.sea.marchex.com/'
