@@ -12,3 +12,6 @@ source_url 'https://github.marchex.com/marchex-chef/mchx_dk'
 # we want this to be a standalone cookbook, so no dependencies unless necessary
 # to install chef-dk, this is necessary
 depends 'chef-dk', '~> 3.1.0'
+
+# for our installs recipe
+depends 'apt'

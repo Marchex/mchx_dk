@@ -26,13 +26,13 @@ if node['platform_family'] == 'debian'
   )
 end
 
-default['mchx_dk']['chef_gem_list'] = %w(
-  tty-prompt
-  chef-vault-testfixtures
-  chef-api
-  vagrant-omnibus
-  vagrant-cachier
-  inspec
-  rest-client
-  octokit
-)
+# marchex_helpers is defined directly in installs.rb
+default['mchx_dk']['chef_gem_list'] = [
+  'tty-prompt',               # marchex-chef-generator
+  'chef-vault-testfixtures',  # chefspec tests for vaults
+  'chef-api',                 # marchex-chef-generator
+  'vagrant-omnibus',          # test kitchen
+  'vagrant-cachier',          # test kitchen
+  'inspec',                   # inspec
+  'octokit'                   # talk to GitHub API (mostly marchex-chef-generator)
+]
