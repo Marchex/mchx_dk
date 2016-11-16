@@ -18,11 +18,13 @@ def test_platform(attrs)
   end
 
   it 'converges successfully' do
+    stub_command("grep true /tmp/chefdk_uptodate").and_return(true)
     chef_run.converge(described_recipe)
     expect { chef_run }.to_not raise_error
   end
 
   it 'installs latest chef_dk' do
+    stub_command("grep true /tmp/chefdk_uptodate").and_return(false)
     chef_run.converge(described_recipe)
     expect(chef_run).to install_chef_dk 'MarChefDK'
   end

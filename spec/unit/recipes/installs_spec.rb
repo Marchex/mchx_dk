@@ -45,7 +45,7 @@ def test_platform(attrs)
 
   it 'installs custom gems' do
     chef_run.converge(described_recipe)
-    %w(octokit marchex_helpers).sort.each do |chef_gem|
+    %w(marchex_helpers).sort.each do |chef_gem|
       expect(chef_run).to install_chef_gem(chef_gem).with(
         'source'        => 'http://rubygems.sea.marchex.com/',
         'clear_sources' => true

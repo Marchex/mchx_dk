@@ -34,4 +34,5 @@ default['mchx_dk']['chef_gem_list'] = %w(
   vagrant-cachier
   inspec
   rest-client
+  octokit
 )
