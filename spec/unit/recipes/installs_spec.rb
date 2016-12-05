@@ -10,6 +10,7 @@ require 'spec_helper'
 
 def test_platform(attrs)
   let(:chef_run) do
+    stub_command("wc -l /tmp/mchx_dk_virtualbox_packages_installed").and_return(true)
     if attrs.nil?
       ChefSpec::ServerRunner.new
     else

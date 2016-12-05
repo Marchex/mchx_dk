@@ -13,7 +13,6 @@ node['mchx_dk']['package_list'].each do |pkg|
   package pkg
 end
 
-
 if node['platform'] == 'ubuntu'
   # we don't want to do any messing with virtualbox if it is already installed
   bash 'virtualbox_packages_installed' do
