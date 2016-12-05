@@ -1,6 +1,6 @@
 # mchx_dk
 
-This is the development kit for doing Chef development at Marchex.  It installs the [Chef Development Kit](https://github.com/chef/chef-dk) from Chef, along with supporting system packages as necessary, in default system locations.  The Marchex-specific portions of the kit will be placed in one directory on your workstation (default is `$HOME/marchex-chef`, but it can be wherever you wish).
+This is the development kit for doing Chef development at Marchex.  It installs the latest stable release of the [Chef Development Kit](https://github.com/chef/chef-dk) from Chef, along with supporting system packages as necessary, in default system locations.  The Marchex-specific portions of the kit will be placed in one directory on your workstation (default is `$HOME/marchex-chef`, but it can be wherever you wish).
 
 It will prepare your workstation for working with cookbooks: creating, writing, modifying, and testing them.
 

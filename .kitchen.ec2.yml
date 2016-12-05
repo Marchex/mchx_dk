@@ -5,6 +5,7 @@
 suites:
   - name: default
     run_list:
+      - recipe[mchx_dk::chef_dk]
       - recipe[mchx_dk::default]
     verifier:
       name: inspec

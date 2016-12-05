@@ -1,4 +1,10 @@
 # Things to ignore
+AllCops:
+  Exclude:
+    # these are vendored
+    - cookbooks/**/*
+    - vendor/**/*
+
 Metrics/LineLength:
   Enabled: false
 
