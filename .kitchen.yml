@@ -7,6 +7,13 @@ suites:
     run_list:
       - recipe[mchx_dk::chef_dk]
       - recipe[mchx_dk::default]
+      - recipe[sudo::default]
+    attributes:
+      authorization:
+        sudo:
+          groups: ['wheel', 'sudo']
+          users: ['ubuntu', 'vagrant', 'ec2-user', 'centos']
+          passwordless: true
     verifier:
       name: inspec
       inspec_tests:
