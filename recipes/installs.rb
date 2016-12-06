@@ -19,7 +19,7 @@ if node['platform'] == 'ubuntu'
     # ask dpkg for any packages matching "virtualbox"
     # it has to be installed with no errors ("ii ") and match "virtualbox" or "virtualbox-\d+.\d+"
     code <<-EOH
-      echo -n $(dpkg-query -l virtualbox* | grep '^ii  virtualbox(-[0-9]+\.[0-9]+)? ') | grep . > /tmp/mchx_dk_virtualbox_packages_installed
+      echo -n $(dpkg-query -l virtualbox* | grep '^ii  virtualbox(-[0-9]+\.[0-9]+)? ') > /tmp/mchx_dk_virtualbox_packages_installed
       EOH
   end
 
