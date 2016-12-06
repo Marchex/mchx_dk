@@ -25,7 +25,7 @@ if node['platform'] == 'ubuntu'
 
   # If 12.04, then vbox 4x (if not ubuntu, you're on your own)
   apt_repository 'virtualbox-4x' do
-    not_if 'wc -l /tmp/mchx_dk_virtualbox_packages_installed'
+    not_if 'grep . /tmp/mchx_dk_virtualbox_packages_installed'
     only_if { node['platform_version'] == '12.04' }
     uri 'http://download.virtualbox.org/virtualbox/debian'
     distribution 'trusty'
@@ -34,13 +34,13 @@ if node['platform'] == 'ubuntu'
   end
 
   package 'virtualbox-4.3' do
-    not_if 'wc -l /tmp/mchx_dk_virtualbox_packages_installed'
+    not_if 'grep . /tmp/mchx_dk_virtualbox_packages_installed'
     only_if { node['platform_version'] == '12.04' }
   end
 
   # If 16.04, then vbox 5x
   apt_repository 'virtualbox-5x' do
-    not_if 'wc -l /tmp/mchx_dk_virtualbox_packages_installed'
+    not_if 'grep . /tmp/mchx_dk_virtualbox_packages_installed'
     only_if { node['platform_version'] == '16.04' }
     uri 'http://download.virtualbox.org/virtualbox/debian'
     distribution 'xenial'
@@ -49,7 +49,7 @@ if node['platform'] == 'ubuntu'
   end
 
   package 'virtualbox-5.0' do
-    not_if 'wc -l /tmp/mchx_dk_virtualbox_packages_installed'
+    not_if 'grep . /tmp/mchx_dk_virtualbox_packages_installed'
     only_if { node['platform_version'] == '16.04' }
   end
 end
