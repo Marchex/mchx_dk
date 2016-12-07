@@ -57,12 +57,14 @@ end
 node['mchx_dk']['chef_gem_list'].each do |gem|
   chef_gem gem do
     compile_time false
+    action :upgrade
   end
 end
 
 chef_gem 'marchex_helpers' do
   clear_sources true
   source 'http://rubygems.sea.marchex.com/'
-  version '>= 0.1.17'
+  version '>= 0.1.20'
   compile_time false
+  action :upgrade
 end

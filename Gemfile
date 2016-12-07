@@ -4,7 +4,7 @@ gem 'rake'
 gem 'chef'
 gem 'mixlib-install'
 
-gem 'marchex_helpers', '>= 0.1.17', :source => 'http://rubygems.sea.marchex.com/'
+gem 'marchex_helpers', '>= 0.1.20', :source => 'http://rubygems.sea.marchex.com/'
 gem 'safe_yaml'
 gem 'test-kitchen'
 gem 'kitchen-vagrant'
