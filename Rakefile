@@ -2,35 +2,39 @@
 
 task :default => [:list]
 
-desc "Lists all the tasks."
+desc "List all the tasks."
 task :list do
     puts "Tasks: \n- #{Rake::Task.tasks.join("\n- ")}"
 end
 
-desc "Checks for required dependencies."
+desc "Check for (and resolve) required dependencies."
 task :check do
-  sh "bundle check"
+  sh "bundle check || bundle install"
 end
 
-desc "Runs chefspec tests."
+desc "Run chefspec tests."
 task :chefspec do
-    sh "rspec spec"
+    Rake::Task[:check].execute
+    sh "bundle exec rspec spec"
 end
 
-desc "Runs kitchen tests."
+desc "Run kitchen tests."
 task :kitchen do
+    Rake::Task[:check].execute
     sh "kitchen test"
 end
 
-desc "Runs foodcritic."
+desc "Run foodcritic."
 task :foodcritic do
-    sh "foodcritic ."
-    sh "foodcritic . -G -t marchex"
+    Rake::Task[:check].execute
+    sh "bundle exec foodcritic ." # runs all built-in foodcritic rules
+    sh "bundle exec foodcritic . -G -t marchex_base" # marchex-specific rules
 end
 
-desc "Runs rubocop."
+desc "Run rubocop."
 task :rubocop do
-    sh "rubocop ."
+    Rake::Task[:check].execute
+    sh "bundle exec rubocop ."
 end
 
 desc "Checks shell syntax."
@@ -39,26 +43,10 @@ task :syntax do
     sh "bash -n run_cookbook.sh"
 end
 
-desc "Run delivery verify tests."
-task :dverify do
-  sh "delivery job -l verify 'unit lint syntax'"
-end
-
-desc "Run delivery verify tests."
-task :dkitchen do
-  sh "delivery job -l acceptance functional"
-end
-
-desc "Run delivery verify tests."
-task :delivery do
-  Rake::Task[:dverify].execute
-  Rake::Task[:dkitchen].execute
-end
-
 desc "Run validation tests."
 task :lint do
-  Rake::Task[:foodcritic].execute
   Rake::Task[:rubocop].execute
+  Rake::Task[:foodcritic].execute
 end
 
 desc "Run unit tests."
@@ -74,8 +62,13 @@ task :integration do
   Rake::Task[:kitchen].execute
 end
 
-desc "Run all tests."
-task :all do
-  Rake::Task[:unit].execute
-  Rake::Task[:kitchen].execute
+desc "Run delivery verify tests."
+task :dverify do
+  sh "delivery job -l verify 'unit lint syntax'"
+end
+
+desc "Run delivery verify tests."
+task :delivery do
+  Rake::Task[:dverify].execute
+  Rake::Task[:dkitchen].execute
 end
