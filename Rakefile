@@ -18,12 +18,6 @@ task :chefspec do
     sh "bundle exec rspec spec"
 end
 
-desc "Run kitchen tests."
-task :kitchen do
-    Rake::Task[:check].execute
-    sh "kitchen test"
-end
-
 desc "Run foodcritic."
 task :foodcritic do
     Rake::Task[:check].execute
@@ -56,19 +50,12 @@ task :unit do
   Rake::Task[:syntax].execute
 end
 
-desc "Run integration tests."
-task :integration do
-  Rake::Task[:chefspec].execute
-  Rake::Task[:kitchen].execute
-end
-
 desc "Run delivery verify tests."
 task :dverify do
   sh "delivery job -l verify 'unit lint syntax'"
 end
 
-desc "Run delivery verify tests."
+desc "Run delivery tests."
 task :delivery do
   Rake::Task[:dverify].execute
-  Rake::Task[:dkitchen].execute
 end
