@@ -1,12 +1,15 @@
 source 'https://supermarket.marchex.com'
 source 'https://supermarket.chef.io'
 
+metadata
+
 group :integration do
-  # These cookbooks will only be included when running under Test Kitchen
+  # Only pull these in for Test Kitchen
+  cookbook 'set_hostname'
+  cookbook 'pop_prod_sad'
+  cookbook 'pop_prod_aws_us_west_2_vpc2'
   cookbook 'sudo'
 end
-
-metadata
 
 solver :ruby, :required
 
