@@ -99,4 +99,4 @@ Vagrantfile
 ##########
 .travis.yml
 
-.vendor/*
+.vendor

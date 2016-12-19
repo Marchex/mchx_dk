@@ -16,6 +16,7 @@ bin/*
 
 .kitchen/
 .kitchen.local.yml
+# intelliJ workspace files
 .idea/
 
 nodes
