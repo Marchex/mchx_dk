@@ -12,8 +12,9 @@ To use mchx_dk you need accounts on Marchex's [Chef](https://chef.marchex.com/),
 * Log in to [GitHub](https://github.marchex.com/) to create your account (see the [GitHub wiki page](http://wiki.marchex.com/index.php/GitHub#Access) for more information)
 * Set up your GitHub API token
 * Go to [Chef](https://chef.marchex.com/) and sign in with your LDAP username and password to create your account, and select the option to Link your account
-* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20and%20Automate%20accounts) to set up your Chef and Automate accounts.
+* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20and%20Automate%20accounts&body=Here%27s%20my%20public%20SSH%20key%20(output%20of%20%60ssh-add%20-L%60%20on%20my%20workstation)%3A) to set up your Chef and Automate accounts, and paste in the email your SSH public key.
   * **TOOLS TEAM ONLY**: create the user's account in the Automate UI (as an "LDAP" user with "admin" role) and then run `setup_chef_user.sh $USER` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.
+  * **TOOLS TEAM ONLY**: Open the user's entry in the [delivery admin UI](https://delivery.marchex.com/e/marchex/#/users) and add their SSH key and verify that they have 'admin' permissions.
 
 * Chef Automate is a product that includes Workflow (which used to be called Delivery) and Insights.
 
