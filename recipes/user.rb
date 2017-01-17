@@ -61,3 +61,13 @@ node['mchx_dk']['repo_list'].each do |repo, dir|
     action :sync
   end
 end
+
+directory "#{ENV['HOME']}/.chef" do
+  owner dk_user
+  recursive :true
+end
+
+directory "#{ENV['HOME']}/.berkshelf" do
+  owner dk_user
+  recursive :true
+end
