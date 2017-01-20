@@ -62,7 +62,18 @@ node['mchx_dk']['repo_list'].each do |repo, dir|
   end
 end
 
+# clean up dir ownnership
 directory "#{ENV['HOME']}/.chef" do
+  owner dk_user
+  recursive :true
+end
+
+directory "#{ENV['HOME']}/.chefdk" do
+  owner dk_user
+  recursive :true
+end
+
+directory "#{ENV['HOME']}/.delivery" do
   owner dk_user
   recursive :true
 end
