@@ -65,20 +65,20 @@ end
 # clean up dir ownnership
 directory "#{ENV['HOME']}/.chef" do
   owner dk_user
-  recursive :true
+  recursive true
 end
 
 directory "#{ENV['HOME']}/.chefdk" do
   owner dk_user
-  recursive :true
+  recursive true
 end
 
 directory "#{ENV['HOME']}/.delivery" do
   owner dk_user
-  recursive :true
+  recursive true
 end
 
 directory "#{ENV['HOME']}/.berkshelf" do
   owner dk_user
-  recursive :true
+  recursive true
 end
