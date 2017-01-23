@@ -13,7 +13,7 @@ To use mchx_dk you need accounts on Marchex's [Chef](https://chef.marchex.com/),
 * Set up your GitHub API token
 * Go to [Chef](https://chef.marchex.com/) and sign in with your LDAP username and password to create your account, and select the option to Link your account
 * Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20and%20Automate%20accounts&body=Here%27s%20my%20public%20SSH%20key%20(output%20of%20%60ssh-add%20-L%60%20on%20my%20workstation)%3A) to set up your Chef and Automate accounts, and paste/attach your SSH public key in the email.  Without it, you cannnot create new cookbooks with [marchex-chef-generator](https://github.marchex.com/marchex-chef/marchex-chef-generator/).
-  * **TOOLS TEAM ONLY**: create the user's account in the Automate UI (as an "LDAP" user with "admin" role) and then run `setup_chef_user.sh $USER $SSH_PUBLIC_KEY_FILE` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.  (SSH public key is not required, if user does not supply it.)
+  * **TOOLS TEAM ONLY**: create the user's account in the Automate UI (as an "LDAP" user with "admin" role) and then run `setup_chef_user.sh $USER $SSH_PUBLIC_KEY_FILE` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.  (SSH public key is not required, if user does not supply it.  You can also save the SSH key in the Automate UI when you create the account, instead.)
 
 * Chef Automate is a product that includes Workflow (which used to be called Delivery) and Insights.
 
