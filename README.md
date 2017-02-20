@@ -10,21 +10,20 @@ It will prepare your workstation for working with cookbooks: creating, writing, 
 To use mchx_dk you need accounts on Marchex's [Chef](https://chef.marchex.com/), [Automate](https://delivery.marchex.com/)*, [GitHub](https://github.marchex.com/).
 
 * Log in to [GitHub](https://github.marchex.com/) to create your account (see the [GitHub wiki page](http://wiki.marchex.com/index.php/GitHub#Access) for more information)
-* Set up your GitHub API token
-* Go to [Chef](https://chef.marchex.com/) and sign in with your LDAP username and password to create your account, and select the option to Link your account
 * Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20and%20Automate%20accounts&body=Here%27s%20my%20public%20SSH%20key%20(output%20of%20%60ssh-add%20-L%60%20on%20my%20workstation)%3A) to set up your Chef and Automate accounts, and paste/attach your SSH public key in the email.  Without it, you cannnot create new cookbooks with [marchex-chef-generator](https://github.marchex.com/marchex-chef/marchex-chef-generator/).
-  * **TOOLS TEAM ONLY**: create the user's account in the Automate UI (as an "LDAP" user with "admin" role) and then run `setup_chef_user.sh $USER $SSH_PUBLIC_KEY_FILE` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.  (SSH public key is not required, if user does not supply it.  You can also save the SSH key in the Automate UI when you create the account, instead.)
+  * **TOOLS TEAM ONLY**: create the user's account in the Automate UI (as an "LDAP" user with "admin" role) and then run `setup_chef_user.sh $USER $SSH_PUBLIC_KEY_FILE` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.  (SSH public key is not required, if user does not supply it.  You can also save the SSH key in the Automate UI when you create the account, instead.)  If the user is newly created in Chef, send the user the `$USER.pem` file (their new client key) the script generated.
+
 
 * Chef Automate is a product that includes Workflow (which used to be called Delivery) and Insights.
 
 
 ## Get Client Key
 
-If you do not already have a client key for the in-house Chef server, you will need to either get your key migrated from the old server, or create a new one if you don't have an old one.
+If you do not already have a client key for the in-house Chef server (which may have been generated for you above), you will need to either get your key migrated from the old server, or create a new one if you don't have an old one.
 
 * To migrate it, ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20migrate%20my%20Chef%20key) that you want it migrated, and tell them what your user name is on the out-house Chef.  Then you can use the same key on both in-house and out-house Chef servers.
   * **TOOLS TEAM ONLY**:  run `migrate_chef_user_key.sh $OUTHOUSE_USER $USER` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to copy their public key from the out-house Chef to the in-house Chef.
-* If you do not have a client key, or you need to reset it, you can go into the UI, select your name in the top right, select "My Profile", and then click "Reset Key."  That will generate a new key and give you the new private key file.
+* If you do not have a client key, or you need to reset it, you can go into the UI, select your name in the top right, select "My Profile", and then click "Reset Key."  That will generate a new key and give you the new private key file.  NOTE: if after logging in with your LDAP password, the Chef UI asks for your password to "Link Accounts", that one-time password is `nopass`.
 * Copy your Chef client key to your workstation at `$HOME/.ssh/$USER.pem` (or wherever you prefer) if you don't already have it there, so you can tell the installer where it lives.
 
 
@@ -34,7 +33,7 @@ If you do not already have a client key for the in-house Chef server, you will n
     * curl
     * vagrant
     * VirtualBox
-1. Fetch and run the install script. You will be prompted a few times for paths and passwords. You will only need to re-run the install script if you want to re-install your setup, or update ChefDK.  It has been tested on Ubuntu 12.04, Ubuntu 16.04, and macOS.
+1. Fetch and run the install script. You will be prompted a few times for paths and passwords. You will only need to re-run the install script if you want to re-install your setup, or update ChefDK.  It has been tested on Ubuntu 12.04, Ubuntu 14.04, Ubuntu 16.04, and macOS.
     * With curl:
         * `bash <(curl -sL https://github.marchex.com/marchex-chef/mchx_dk/raw/master/install.sh)`
     * With wget:
