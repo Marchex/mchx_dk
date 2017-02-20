@@ -7,7 +7,7 @@ It will prepare your workstation for working with cookbooks: creating, writing, 
 
 ## Create User Accounts
 
-To use mchx_dk you need accounts on Marchex's [Chef](https://chef.marchex.com/), [Automate](https://delivery.marchex.com/)*, [GitHub](https://github.marchex.com/).
+To use mchx_dk you need accounts on Marchex's [Chef](https://chef.marchex.com/), [Automate](https://delivery.marchex.com/)*, [GitHub](https://github.marchex.com/).  Admins will create your Chef and Automate accounts for you.
 
 * Log in to [GitHub](https://github.marchex.com/) to create your account (see the [GitHub wiki page](http://wiki.marchex.com/index.php/GitHub#Access) for more information)
 * Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20and%20Automate%20accounts&body=Here%27s%20my%20public%20SSH%20key%20(output%20of%20%60ssh-add%20-L%60%20on%20my%20workstation)%3A) to set up your Chef and Automate accounts, and paste/attach your SSH public key in the email.  Without it, you cannnot create new cookbooks with [marchex-chef-generator](https://github.marchex.com/marchex-chef/marchex-chef-generator/).
@@ -23,7 +23,7 @@ If you do not already have a client key for the in-house Chef server (which may 
 
 * To migrate it, ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20migrate%20my%20Chef%20key) that you want it migrated, and tell them what your user name is on the out-house Chef.  Then you can use the same key on both in-house and out-house Chef servers.
   * **TOOLS TEAM ONLY**:  run `migrate_chef_user_key.sh $OUTHOUSE_USER $USER` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to copy their public key from the out-house Chef to the in-house Chef.
-* If you do not have a client key, or you need to reset it, you can go into the UI, select your name in the top right, select "My Profile", and then click "Reset Key."  That will generate a new key and give you the new private key file.  NOTE: if after logging in with your LDAP password, the Chef UI asks for your password to "Link Accounts", that one-time password is `nopass`.
+* If you do not have a client key, or you need to reset it, you can go into the UI, select your name in the top right, select "My Profile", and then click "Reset Key."  That will generate a new key and give you the new private key file.  **NOTE**: if after logging in with your LDAP password, the Chef UI asks for your password to "Link Accounts", that one-time password is `nopass`.
 * Copy your Chef client key to your workstation at `$HOME/.ssh/$USER.pem` (or wherever you prefer) if you don't already have it there, so you can tell the installer where it lives.
 
 
@@ -47,6 +47,6 @@ If you do not already have a client key for the in-house Chef server (which may 
 
 1. `cd` to your new directory `marchex-chef/cookbooks/mchx_dk`.
 1. Run `knife user show $USER` to see your own user config from the Chef server.
-1. Run `knife user list | grep ianderson` to verify that `ianderson` is *NOT* in the list.  This ensures we are using the correct Chef server.
+1. Run `knife environment list | grep delivered` to verify that `delivered` is in the list.  This ensures we are using the correct Chef server.
 1. Run `delivery api get orgs` to verify that communication with the Automate Workflow server is working.
-1. Run `rake unit dverify` to test that the basic tests are working.
+1. Run `rake unit` to test that the basic tests are working.
