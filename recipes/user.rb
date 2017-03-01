@@ -24,30 +24,12 @@ directory "#{basedir}/.chef" do
   owner dk_user
 end
 
-directory "#{ENV['HOME']}/.delivery" do
-  owner dk_user
-end
-
-link "#{ENV['HOME']}/.delivery/.chef" do
-  to "#{basedir}/.chef"
-  owner dk_user
-end
-
 template "#{basedir}/.chef/knife.rb" do
   source "knife.rb.erb"
   owner dk_user
   variables(
     :dk_user       => dk_user,
     :dk_client_key => dk_client_key
-  )
-  action :create_if_missing
-end
-
-template "#{ENV['HOME']}/.delivery/cli.toml" do
-  source "cli.toml.erb"
-  owner dk_user
-  variables(
-    :dk_user => dk_user
   )
   action :create_if_missing
 end
@@ -69,11 +51,6 @@ directory "#{ENV['HOME']}/.chef" do
 end
 
 directory "#{ENV['HOME']}/.chefdk" do
-  owner dk_user
-  recursive true
-end
-
-directory "#{ENV['HOME']}/.delivery" do
   owner dk_user
   recursive true
 end

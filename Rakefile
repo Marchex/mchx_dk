@@ -49,13 +49,3 @@ task :unit do
   Rake::Task[:chefspec].execute
   Rake::Task[:syntax].execute
 end
-
-desc "Run delivery verify tests."
-task :dverify do
-  sh "delivery job -l verify 'unit lint syntax'"
-end
-
-desc "Run delivery tests."
-task :delivery do
-  Rake::Task[:dverify].execute
-end
