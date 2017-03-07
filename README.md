@@ -4,17 +4,17 @@ This is the development kit for doing Chef development at Marchex.  It installs 
 
 It will prepare your workstation for working with cookbooks: creating, writing, modifying, and testing them.
 
+This is for in-house Chef development.  See [Chef on the Marchex wiki](http://wiki.marchex.com/index.php/Chef#Using_Chef) for more information.
+
 
 ## Create User Accounts
 
-To use mchx_dk you need accounts on Marchex's [Chef](https://chef.marchex.com/), [Automate](https://delivery.marchex.com/)*, [GitHub](https://github.marchex.com/).  Admins will create your Chef and Automate accounts for you.
+To use mchx_dk you need accounts on Marchex's [Chef](https://chef.marchex.com/), and [GitHub](https://github.marchex.com/).  Admins will create your Chef account for you.
 
 * Log in to [GitHub](https://github.marchex.com/) to create your account (see the [GitHub wiki page](http://wiki.marchex.com/index.php/GitHub#Access) for more information)
-* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20and%20Automate%20accounts&body=Here%27s%20my%20public%20SSH%20key%20(output%20of%20%60ssh-add%20-L%60%20on%20my%20workstation)%3A) to set up your Chef and Automate accounts, and paste/attach your SSH public key in the email.  Without it, you cannnot create new cookbooks with [marchex-chef-generator](https://github.marchex.com/marchex-chef/marchex-chef-generator/).
-  * **TOOLS TEAM ONLY**: create the user's account in the Automate UI (as an "LDAP" user with "admin" role) and then run `setup_chef_user.sh $USER $SSH_PUBLIC_KEY_FILE` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.  (SSH public key is not required, if user does not supply it.  You can also save the SSH key in the Automate UI when you create the account, instead.)  If the user is newly created in Chef, send the user the `$USER.pem` file (their new client key) the script generated.
+* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20account&body=Here%27s%20my%20public%20SSH%20key%20(output%20of%20%60ssh-add%20-L%60%20on%20my%20workstation)%3A) to set up your Chef account, and paste/attach your SSH public key in the email.  Without it, you cannnot create new cookbooks with [marchex-chef-generator](https://github.marchex.com/marchex-chef/marchex-chef-generator/).
+  * **TOOLS TEAM ONLY**: run `setup_chef_user.sh $USER $SSH_PUBLIC_KEY_FILE` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.  (SSH public key is not required, if user does not supply it.  It is used to put the user's key on Chef-controlled hosts.)  If the user is newly created in Chef, send the user the `$USER.pem` file (their new client key) the script generated.
 
-
-* Chef Automate is a product that includes Workflow (which used to be called Delivery) and Insights.
 
 
 ## Get Client Key
@@ -48,5 +48,4 @@ If you do not already have a client key for the in-house Chef server (which may 
 1. `cd` to your new directory `marchex-chef/cookbooks/mchx_dk`.
 1. Run `knife user show $USER` to see your own user config from the Chef server.
 1. Run `knife environment list | grep delivered` to verify that `delivered` is in the list.  This ensures we are using the correct Chef server.
-1. Run `delivery api get orgs` to verify that communication with the Automate Workflow server is working.
 1. Run `rake unit` to test that the basic tests are working.
