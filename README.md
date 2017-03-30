@@ -9,21 +9,20 @@ This is for in-house Chef development.  See [Chef on the Marchex wiki](http://wi
 
 ## Create User Accounts
 
-To use mchx_dk you need accounts on Marchex's [Chef](https://chef.marchex.com/), and [GitHub](https://github.marchex.com/).  Admins will create your Chef account for you.
+To use mchx_dk you first need an account on [GitHub](https://github.marchex.com/).
 
 * Log in to [GitHub](https://github.marchex.com/) to create your account (see the [GitHub wiki page](http://wiki.marchex.com/index.php/GitHub#Access) for more information)
-* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20account&body=Here%27s%20my%20public%20SSH%20key%20(output%20of%20%60ssh-add%20-L%60%20on%20my%20workstation)%3A) to set up your Chef account, and paste/attach your SSH public key in the email.  Without it, you cannnot create new cookbooks with [marchex-chef-generator](https://github.marchex.com/marchex-chef/marchex-chef-generator/).
-  * **TOOLS TEAM ONLY**: run `setup_chef_user.sh $USER $SSH_PUBLIC_KEY_FILE` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.  (SSH public key is not required, if user does not supply it.  It is used to put the user's key on Chef-controlled hosts.)  If the user is newly created in Chef, send the user the `$USER.pem` file (their new client key) the script generated.
+* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20account&body=Here%27s%20my%20public%20SSH%20key%20(output%20of%20%60ssh-add%20-L%60%20on%20my%20workstation)%3A) to set up your Chef account.
+  * **TOOLS TEAM ONLY**: run `setup_chef_user.sh $USER` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.  If the user is newly created in Chef, send the user the `$USER.pem` file (their new private client key) the script generated.
 
 
 
 ## Get Client Key
 
-If you do not already have a client key for the in-house Chef server (which may have been generated for you above), you will need to either get your key migrated from the old server, or create a new one if you don't have an old one.
+If you do not already have a client key for the in-house Chef server (which may have been generated for you above), you will need to create a new one.  **NOTE**: you will use the same key everywhere you use chef, for both in-house and out-house, and you'll need to place the key and make your knife.rb point to it everywhere you are using knife.
 
-* To migrate it, ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20migrate%20my%20Chef%20key) that you want it migrated, and tell them what your user name is on the out-house Chef.  Then you can use the same key on both in-house and out-house Chef servers.
-  * **TOOLS TEAM ONLY**:  run `migrate_chef_user_key.sh $OUTHOUSE_USER $USER` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to copy their public key from the out-house Chef to the in-house Chef.
-* If you do not have a client key, or you need to reset it, you can go into the UI, select your name in the top right, select "My Profile", and then click "Reset Key."  That will generate a new key and give you the new private key file.  **NOTE**: if after logging in with your LDAP password, the Chef UI asks for your password to "Link Accounts", that one-time password is `nopass`.
+* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20migrate%20my%20Chef%20key) that you want it created.
+  * **TOOLS TEAM ONLY**:  run `knife user key create $USER -f $USER.pem` for the given user.  This will create a new default keypair for the user and save the private key in a .pem file named for the user, which you then send to the user.
 * Copy your Chef client key to your workstation at `$HOME/.ssh/$USER.pem` (or wherever you prefer) if you don't already have it there, so you can tell the installer where it lives.
 
 
