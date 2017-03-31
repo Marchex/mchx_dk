@@ -22,7 +22,7 @@ To use mchx_dk you first need an account on [GitHub](https://github.marchex.com/
 If you do not already have a client key for the in-house Chef server (which may have been generated for you above), you will need to create a new one.  **NOTE**: you will use the same key everywhere you use chef, for both in-house and out-house, and you'll need to place the key and make your knife.rb point to it everywhere you are using knife.
 
 * Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20migrate%20my%20Chef%20key) that you want it created.
-  * **TOOLS TEAM ONLY**:  run `knife user key create $USER -f $USER.pem` for the given user.  This will create a new default keypair for the user and save the private key in a .pem file named for the user, which you then send to the user.
+  * **TOOLS TEAM ONLY**:  run `knife user key create $USER -f $USER.pem -k default` for the given user.  This will create a new default keypair for the user and save the private key in a .pem file named for the user, which you then send to the user.  If the default keypair already exists, delete it first with `knife_ent user key delete $USER default -y`.
 * Copy your Chef client key to your workstation at `$HOME/.ssh/$USER.pem` (or wherever you prefer) if you don't already have it there, so you can tell the installer where it lives.
 
 
