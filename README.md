@@ -12,7 +12,7 @@ This is for in-house Chef development.  See [Chef on the Marchex wiki](http://wi
 To use mchx_dk you first need an account on [GitHub](https://github.marchex.com/).
 
 * Log in to [GitHub](https://github.marchex.com/) to create your account (see the [GitHub wiki page](http://wiki.marchex.com/index.php/GitHub#Access) for more information)
-* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20account&body=Here%27s%20my%20public%20SSH%20key%20(output%20of%20%60ssh-add%20-L%60%20on%20my%20workstation)%3A) to set up your Chef account.
+* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20account) to set up your Chef account.
   * **TOOLS TEAM ONLY**: run `setup_chef_user.sh $USER` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.  If the user is newly created in Chef, send the user the `$USER.pem` file (their new private client key) the script generated.
 
 
@@ -22,7 +22,7 @@ To use mchx_dk you first need an account on [GitHub](https://github.marchex.com/
 If you do not already have a client key for the in-house Chef server (which may have been generated for you above), you will need to create a new one.  **NOTE**: you will use the same key everywhere you use chef, for both in-house and out-house, and you'll need to place the key and make your knife.rb point to it everywhere you are using knife.
 
 * Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20migrate%20my%20Chef%20key) that you want it created.
-  * **TOOLS TEAM ONLY**:  run `knife user key create $USER -f $USER.pem` for the given user.  This will create a new default keypair for the user and save the private key in a .pem file named for the user, which you then send to the user.
+  * **TOOLS TEAM ONLY**:  run `knife user key create $USER -f $USER.pem -k default` for the given user.  This will create a new default keypair for the user and save the private key in a .pem file named for the user, which you then send to the user.  If the default keypair already exists, delete it first with `knife_ent user key delete $USER default -y`.
 * Copy your Chef client key to your workstation at `$HOME/.ssh/$USER.pem` (or wherever you prefer) if you don't already have it there, so you can tell the installer where it lives.
 
 
