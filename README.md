@@ -12,7 +12,7 @@ This is for in-house Chef development.  See [Chef on the Marchex wiki](http://wi
 To use mchx_dk you first need an account on [GitHub](https://github.marchex.com/).
 
 * Log in to [GitHub](https://github.marchex.com/) to create your account (see the [GitHub wiki page](http://wiki.marchex.com/index.php/GitHub#Access) for more information)
-* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20account&body=Here%27s%20my%20public%20SSH%20key%20(output%20of%20%60ssh-add%20-L%60%20on%20my%20workstation)%3A) to set up your Chef account.
+* Ask the [Tools team](mailto:tools-team@marchex.com?subject=Please%20set%20up%20my%20Chef%20account) to set up your Chef account.
   * **TOOLS TEAM ONLY**: run `setup_chef_user.sh $USER` (from the [chef-utils repo](https://github.marchex.com/marchex-chef/chef-utils/)) to finalize setting their accounts up.  If the user is newly created in Chef, send the user the `$USER.pem` file (their new private client key) the script generated.
 
 
