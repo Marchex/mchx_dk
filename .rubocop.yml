@@ -39,3 +39,6 @@ Style/AlignParameters:
   Exclude:
     # Don't care about this for tests
     - 'spec/unit/recipes/*.rb'
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
