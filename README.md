@@ -48,3 +48,8 @@ If you do not already have a client key for the in-house Chef server (which may 
 1. Run `knife user show $USER` to see your own user config from the Chef server.
 1. Run `knife environment list | grep delivered` to verify that `delivered` is in the list.  This ensures we are using the correct Chef server.
 1. Run `rake unit` to test that the basic tests are working.
+
+
+## Copyright and license
+
+Code and documentation copyright 2016-2017 [Marchex, Inc.](https://www.marchex.com/) ([GitHub](https://github.com/Marchex)). Code released under the [MIT License](https://github.com/Marchex/mchx_dk/blob/master/LICENSE.txt).
