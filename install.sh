@@ -46,7 +46,7 @@ install_chefdk() {
 
 update_env() {
     echo_head 'add chefdk to environment'
-    eval "$(chef shell-init $myshell)"
+    eval "$(chef shell-init bash)"
 }
 
 create_dirs() {
