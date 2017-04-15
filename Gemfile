@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'berkshelf'
+gem 'chef', '~> 12.0'
 gem 'marchex_helpers', '>= 0.1.27', source: 'http://rubygems.sea.marchex.com/'
 gem 'rake'
 
