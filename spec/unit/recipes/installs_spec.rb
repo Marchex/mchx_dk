@@ -4,8 +4,6 @@
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
-# rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-
 require 'spec_helper'
 
 def test_platform(attrs)
