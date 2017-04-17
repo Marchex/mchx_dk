@@ -30,15 +30,37 @@ Style/SpaceInsideParens:
 Style/StringLiterals:
   Enabled: false
 
+# Don't care about these for tests
 Performance/Count:
   Exclude:
-    # Don't care about this for tests
-    - 'spec/unit/recipes/*.rb'
+    - 'spec/**/*.rb'
+    - 'test/**/*.rb'
 
 Style/AlignParameters:
   Exclude:
-    # Don't care about this for tests
-    - 'spec/unit/recipes/*.rb'
+    - 'spec/**/*.rb'
+    - 'test/**/*.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+    - 'test/**/*.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/**/*.rb'
+    - 'test/**/*.rb'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/**/*rb'
+    - 'test/**/*rb'
 
 Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+Style/SymbolArray:
   Enabled: false
