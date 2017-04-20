@@ -25,8 +25,8 @@ def test_platform(attrs)
     chef_run.node['mchx_dk']['repo_list'].sort.each do |repo, dir|
       expect(chef_run).to sync_git(repo).with(
         'destination' => chef_run.node['mchx_dk']['basedir'] + "/#{dir}/" + File.basename(repo),
-        'checkout_branch'      => 'master',
-        'user'        => chef_run.node['mchx_dk']['user']
+        'checkout_branch' => 'master',
+        'user' => chef_run.node['mchx_dk']['user']
       )
     end
   end
