@@ -1,6 +1,6 @@
 ---
 #<% require 'marchex_helpers' %>
-<%= MarchexHelpers.kitchen( driver: :ec2, platforms: [:all], chef_versions: ['latest'] ) %>
+<%= MarchexHelpers.kitchen( driver: :ec2, platforms: [:all]) %>
 
 suites:
   - name: default
