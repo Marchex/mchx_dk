@@ -4,7 +4,7 @@ maintainer_email 'tools-team@marchex.com'
 license 'All Rights Reserved'
 description 'Installs/Configures mchx_dk'
 long_description 'Installs/Configures mchx_dk'
-version '0.1.55'
+version '0.1.56'
 
 chef_version '~> 12.0'
 supports 'ubuntu', '>= 12.04'
