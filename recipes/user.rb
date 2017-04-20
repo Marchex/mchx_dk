@@ -38,7 +38,8 @@ node['mchx_dk']['repo_list'].each do |repo, dir|
   git repo do
     repository "https://github.marchex.com/#{repo}"
     destination "#{basedir}/#{dir}/" + File.basename(repo)
-    branch 'master'
+    checkout_branch 'master'
+    enable_checkout false
     user dk_user
     action :sync
   end
